@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Rock Papers and Scissors!</title>
+    <script>
+      "strict";
+      const CHOICES = ["rock", "scissors", "paper"];
+
+      addEventListener("DOMContentLoaded", () => {
+        for (let i = 0; i < 5; i++) {
+          game();
+        }
+      });
+
+      function getComputerChoice() {
+        let randomIndex = Math.floor(Math.random() * 3);
+        return CHOICES[randomIndex];
+      }
+
+      function playRound(playerSelection, computerSelection) {
+        const WIN_MSG = "You win!";
+        const LOSE_MSG = "You lose!";
+        const TIE_MSG = "It's a tie!";
+        // player plays rock
+        if (playerSelection.toLowerCase() === CHOICES[0]) {
+          if (computerSelection === CHOICES[2]) {
+            return LOSE_MSG; // computer wins with paper
+          } else if (computerSelection === CHOICES[1]) {
+            return WIN_MSG; // computer loses with scissors
+          } else return TIE_MSG;
+        }
+        // player plays scissors
+        if (playerSelection.toLowerCase() === CHOICES[1]) {
+          if (computerSelection === CHOICES[0]) {
+            return LOSE_MSG; // computer wins with rock
+          } else if (computerSelection === CHOICES[2]) {
+            return WIN_MSG; // computer loses with paper
+          } else return TIE_MSG;
+        }
+        // player plays paper
+        if (playerSelection.toLowerCase() === CHOICES[2]) {
+          if (computerSelection === CHOICES[1]) {
+            return LOSE_MSG; // computer wins with scissors
+          } else if (computerSelection === CHOICES[0]) {
+            return WIN_MSG; // computer loses with rock
+          } else return TIE_MSG;
+        }
+      }
+
+      function getPlayerChoice() {
+        let choice = prompt("Choose 'rock', 'paper' or 'scissors':");
+        while (!CHOICES.includes(choice)) {
+          choice = prompt(
+            "INVALID CHOICE.\nChoose 'rock', 'paper' or 'scissors':"
+          );
+        }
+        return choice;
+      }
+
+      function game() {
+        let playerChoice = getPlayerChoice();
+        let computerChoice = getComputerChoice();
+
+        alert(playRound(playerChoice, computerChoice));
+      }
+    </script>
+  </head>
+  <body>
+    <h1>Rock, Papers and Scissors!</h1>
+  </body>
+</html>
